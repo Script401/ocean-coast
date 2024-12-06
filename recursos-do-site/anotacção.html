@@ -1,0 +1,145 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    
+ 
+ 
+ 
+ <div class="joguinhos">
+        <div class="carousel-container">
+            <div class="mini-container">
+                <div class="minigame"><a href="jogos/tetris/index.html"><img src="../img/poluicao.jfif"  class="minigame-img"></a></div>
+                <div class="minigame"><a href="jogos/flap-bird/index.html"><img src="img/banners/Flappy.png"  class="minigame-img" width="300px"></a></div>
+                <div class="minigame"><a href="jogos/2048/index.html"><img src="img/banners/2048.png"  class="minigame-img"></a></div>
+                <div class="minigame"><a href="jogos/Memory-Game/index.html"><img src="img/banners/Memory.png"  class="minigame-img"></a></div>
+            </div>
+        
+            <!-- Indicadores (bolinhas) -->
+            <div class="indicators">
+                <span class="indicator" onclick="moveToSlide(0)"></span>
+                <span class="indicator" onclick="moveToSlide(1)"></span>
+                <span class="indicator" onclick="moveToSlide(2)"></span>
+            </div>
+        </div>
+
+        <style> 
+
+.carousel-container {
+    position: relative;
+    width: 630px; 
+    max-width: 100%;
+    overflow: hidden; 
+    margin: 100px auto;
+    background-color: #A897FF;
+    border-radius: 50px;
+    height: 225px;
+}
+
+.mini-container {
+    display: flex;
+    transition: transform 0.5s ease;
+    gap: 20px; 
+    margin-left: 5px;
+    
+}
+
+.minigame {
+    display: flex;
+    background-color: white;
+    height: 150px;
+    width: 300px;
+    border-radius: 60px;
+    flex-shrink: 0; 
+    margin-top: 30px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
+.minigame-img{
+    height: 150px;
+    width: 300px;
+    border-radius: 60px;
+    position: relative;
+    top: 3px;
+}
+
+.minigame-img-big{
+    height: 500px;
+    width: 500px;
+    border-radius: 60px;
+}
+
+.indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.indicator {
+    height: 12px;
+    width: 12px;
+    background-color: white; 
+    border-radius: 50%;
+    margin: 0 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+    background-color: #6158da; 
+}
+
+
+        </style>
+
+        <script>
+            function moveSlide(direction) {
+    currentIndex += direction;
+
+    // Garante que o índice não ultrapasse os limites dos slides
+    if (currentIndex < 0) {
+        currentIndex = 0; // Não vai além do primeiro slide
+    } else if (currentIndex > totalSlides - slidesToShow) {
+        currentIndex = totalSlides - slidesToShow; // Não vai além do último conjunto de slides visíveis
+    }
+
+    updateCarousel();
+}
+
+function moveToSlide(index) {
+    currentIndex = index; // Define o índice atual para o slide correspondente
+    updateCarousel();
+}
+
+function updateCarousel() {
+    const slides = document.querySelectorAll('.minigame');
+    const slideWidth = slides[0].offsetWidth + 20; // Inclui o gap de 20px
+    const offset = currentIndex * slideWidth;
+
+    document.querySelector('.mini-container').style.transform = `translateX(-${offset}px)`;
+    updateIndicators();
+}
+
+function updateIndicators() {
+    const indicators = document.querySelectorAll('.indicator');
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentIndex);
+    });
+}
+
+
+
+updateIndicators();
+        </script>
+
+    </body>
+ </html>
+
+
+        
